@@ -101,9 +101,14 @@ def draw_ui(surf: Surface, font: Font, left_points: int, right_points: int):
     down = font.render("\\/", False, UI_COLOR)
     down_pos = (SIZE.x - UI_PADDING - down.get_width(), SIZE.y - UI_PADDING - down.get_height())
 
-    controls = [(w, w_pos), (s, s_pos), (up, up_pos), (down, down_pos)]
+    left_score = font.render(str(left_points), False, UI_COLOR)
+    left_score_pos = ((SIZE.x / 2) - left_score.get_width() - UI_PADDING, UI_PADDING)
+    right_score = font.render(str(right_points), False, UI_COLOR)
+    right_score_pos = ((SIZE.x / 2) + UI_PADDING, UI_PADDING)
 
-    surf.blits(controls)
+    ui = [(w, w_pos), (s, s_pos), (up, up_pos), (down, down_pos), (left_score, left_score_pos), (right_score, right_score_pos)]
+
+    surf.blits(ui)
     pygame.draw.rect(surf, UI_COLOR, Rect((SIZE.x / 2) - (BORDER_THICKNESS / 2), UI_PADDING, BORDER_THICKNESS, SIZE.y - UI_PADDING * 2))
 
 
