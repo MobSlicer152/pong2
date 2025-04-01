@@ -78,14 +78,20 @@ def check_ball(
     for rect in [left, right, screen_top, screen_bottom, screen_left, screen_right]:
         dist = sphere_rect_distance(ball, rect)
         if dist < BALL_RADIUS:
-            if rect in [left, right, screen_left, screen_right]:
-                vel.x *= -1
-                if rect == screen_left:
-                    point = Player.RIGHT
-                elif rect == screen_right:
-                    point = Player.LEFT
-            elif rect in [screen_top, screen_bottom]:
-                vel.y *= -1
+            if rect in [left, screen_left]:
+                vel.x = 1 * abs(vel.x)
+            elif rect in [right, screen_right]:
+                vel.x = -1 * abs(vel.x)
+
+            if rect == screen_left:
+                point = Player.RIGHT
+            elif rect == screen_right:
+                point = Player.LEFT
+
+            if rect == screen_top:
+                vel.y = 1 * abs(vel.y)
+            elif rect == screen_bottom:
+                vel.y = -1 * abs(vel.y)
 
     return (point, vel)
 
